@@ -45,14 +45,20 @@
 }
 
 .taken{
-  height: 100px!important;
-  width: 100px!important;
+  --size: 100px;
+  height: var(--size);
+  width: var(--size);
   transition: all 0.5s ease-in;
   box-shadow: var(--box-shadow);
   border-radius: 6px;
   top: 20px;
   right: 20px;
   z-index: 2;
+  transition: var(--transition);
+}
+
+.taken:hover {
+  --size: 200px;
 }
 
 .button .fa  {
