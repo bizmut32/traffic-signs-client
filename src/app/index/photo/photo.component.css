@@ -17,7 +17,7 @@
 
 .camera-button{
   width: 80vw;
-  position: fixed;
+  position: absolute;
   bottom: 30px;
 }
 
@@ -30,4 +30,8 @@
   top: 20px;
   right: 20px;
   z-index: 2;
+}
+
+.button .fa  {
+  margin: 0 2rem 0 0;
 }
