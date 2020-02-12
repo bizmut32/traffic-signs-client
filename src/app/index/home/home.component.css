@@ -81,7 +81,8 @@
 @media screen and (max-width: 450px) {
   .title {
     margin-right: 7%;
-    padding-bottom: 4rem;
+    margin-bottom: 4rem;
+    bottom: 0;
   }
 
   section.main {
@@ -91,9 +92,5 @@
   .background img {
     object-position: 33%;
     height: 129%;
-  }
-
-  .background figure.image-holder {
-    align-items: flex-end;
   }
 }
