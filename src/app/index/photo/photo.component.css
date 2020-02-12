@@ -34,10 +34,6 @@
   object-fit: cover;
 }
 
-.camera-view, .taken-photo, .photo-canvas{
-  transform: scaleX(-1);
-}
-
 .camera-button{
   width: 80vw;
   position: absolute;
@@ -64,4 +60,10 @@
 .button .fa  {
   margin: 0 2rem 0 0;
   animation: none;
+}
+
+@media screen and (min-width: 500px) {
+  .camera-view, .taken-photo, .photo-canvas{
+    transform: scaleX(-1);
+  }
 }
