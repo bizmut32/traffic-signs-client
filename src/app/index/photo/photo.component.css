@@ -4,6 +4,29 @@
   display: flex;
   justify-content: center;
 }
+
+.back-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  font-size: 25px;
+  margin: 1rem 3rem;
+  font-weight: 700;
+  color: #fff9;
+  cursor: pointer;
+  transition: var(--transition);
+  text-shadow: 3px 3px 8px #0002;
+}
+
+.back-button:hover {
+  color: #fffc;
+}
+
+.back-button .fa {
+  margin-right: 20px;
+}
+
 .camera-view, .taken-photo, .photo-canvas{
   position: absolute;
   height: 100%;
@@ -22,16 +45,23 @@
 }
 
 .taken{
-  height: 100px!important;
-  width: 100px!important;
+  --size: 100px;
+  height: var(--size);
+  width: var(--size);
   transition: all 0.5s ease-in;
   box-shadow: var(--box-shadow);
   border-radius: 6px;
   top: 20px;
   right: 20px;
   z-index: 2;
+  transition: var(--transition);
+}
+
+.taken:hover {
+  --size: 200px;
 }
 
 .button .fa  {
   margin: 0 2rem 0 0;
+  animation: none;
 }
