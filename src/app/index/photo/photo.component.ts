@@ -18,10 +18,9 @@ export class PhotoComponentComponent implements OnInit {
   }
 
   initializeCamera() {
-    const constraints = { video: { facingMode: 'user' }, audio: false };
+    const constraints = { video: { facingMode: 'environment' }, audio: false };
     navigator.mediaDevices.getUserMedia(constraints)
     .then((stream) => {
-      const track = stream.getTracks()[0];
       this.cameraView.nativeElement.srcObject = stream;
     })
     .catch(function(error) {
