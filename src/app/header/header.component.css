@@ -1,0 +1,11 @@
+.main {
+  position: fixed;
+  height: 5rem;
+  z-index: 5;
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#fffa, transparent);
+}
+

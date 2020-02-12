@@ -1,0 +1,6 @@
+<section class="main">
+  <canvas class="photo-canvas" id="camera--sensor" #photoCanvas></canvas>
+  <video class="camera-view" id="camera--view" autoplay playsinline #cameraView></video>
+  <img src="//:0" alt="" class="taken-photo" id="camera--output" #takenPhoto>
+  <button class="button camera-button" id="camera--trigger" (click)="takePhoto()">Take a picture</button>
+</section>

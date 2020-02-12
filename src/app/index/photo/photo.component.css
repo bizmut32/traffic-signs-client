@@ -1,0 +1,33 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.camera-view, .taken-photo, .photo-canvas{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.camera-view, .taken-photo, .photo-canvas{
+  transform: scaleX(-1);
+}
+
+.camera-button{
+  width: 80vw;
+  position: fixed;
+  bottom: 30px;
+}
+
+.taken{
+  height: 100px!important;
+  width: 100px!important;
+  transition: all 0.5s ease-in;
+  box-shadow: var(--box-shadow);
+  border-radius: 6px;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+}
