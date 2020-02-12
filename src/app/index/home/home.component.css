@@ -77,3 +77,23 @@
   from { transform: translateX(-10rem); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
+
+@media screen and (max-width: 450px) {
+  .title {
+    margin-right: 7%;
+    padding-bottom: 4rem;
+  }
+
+  section.main {
+    align-items: flex-end;
+  }
+
+  .background img {
+    object-position: 33%;
+    height: 129%;
+  }
+
+  .background figure.image-holder {
+    align-items: flex-end;
+  }
+}
