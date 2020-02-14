@@ -1,2 +1,11 @@
 <nav class="main">
+  <div class="header-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <span>Home</span>
+  </div>
+  <div class="header-item" routerLink="/app" routerLinkActive="active">
+    <span>Application</span>
+  </div>
+  <div class="header-item" routerLink="/train-test" routerLinkActive="active">
+    <span>Train / Test</span>
+  </div>
 </nav>

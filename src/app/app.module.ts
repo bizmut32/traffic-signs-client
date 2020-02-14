@@ -7,6 +7,7 @@ import { HomeComponent } from './index/home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { IndexComponent } from './index/index.component';
 import { PhotoComponentComponent } from './index/photo/photo.component';
+import { TrainTestComponent } from './index/train-test/train-test.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { PhotoComponentComponent } from './index/photo/photo.component';
     HomeComponent,
     HeaderComponent,
     IndexComponent,
-    PhotoComponentComponent
+    PhotoComponentComponent,
+    TrainTestComponent
   ],
   imports: [
     BrowserModule,
