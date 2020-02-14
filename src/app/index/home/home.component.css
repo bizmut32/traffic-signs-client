@@ -47,7 +47,7 @@
 }
 
 .title h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   width: min-content;
   color: var(--white);
   text-shadow: 4px 4px 10px var(--gray);

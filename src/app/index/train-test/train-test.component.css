@@ -7,11 +7,8 @@
 }
 
 .title {
-  padding: 3rem;
   text-align: center;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  padding: 2rem 0;
 }
 
 .title header {
@@ -25,10 +22,9 @@
 .details {
   font-size: 1.1rem;
   font-weight: 400;
-  max-width: 30vw;
 }
 
-section.upload::before {
+.separator::before {
   position: absolute;
   content: '';
   top: 0;
@@ -37,10 +33,9 @@ section.upload::before {
   background-color: var(--light);
 }
 
-section.upload {
+.separator {
   position: relative;
   width: 75vw;
-  padding: 5rem 0;
 }
 
 section.upload .padding {
@@ -58,15 +53,26 @@ section.upload article {
   margin-right: 4rem;
 }
 
-section.upload article h3 {
-  font-weight: 600;
-}
-
 .card-box {
   flex: 2;
   background-color: white;
   border-radius: 1.6rem;
   box-shadow: 0 0 3rem rgba(0,0,0,0.1);
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-box h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.card-box .details {
+  font-size: 1rem;
 }
 
 .card-content {
@@ -82,48 +88,15 @@ input[type="file"] {
   cursor: pointer;
 }
 
-.upload-box {
-  flex: 1;
-  position: relative;
-  height: 100%;
+.card-box .button {
+  width: 100%;
 }
 
-section.upload .padding {
-  padding: 2rem;
-  height: 100%;
-}
-
-.classification {
-  flex: 1;
-}
-
-.upload-box::before {
-  position: absolute;
-  content: '';
-  right: 0;
-  height: 100%;
-  width: 1px;
-  background-color: var(--light);
-}
-
-.image-upload {
-  display: flex;
-  overflow: hidden;
-}
-.image-upload span {
-  word-wrap: none;
-}
-
-.upload-box .button {
-  align-self: center;
-  justify-self: center;
-}
-
-.upload-box .button i {
+.card-box .button i {
   animation: none;
 }
 
-.result {
-  height: 6rem;
-  width: 6rem
+.chosen-image {
+  border-radius: .8rem;
+  box-shadow: 0 0 1rem rgba(0,0,0,0.1);
 }

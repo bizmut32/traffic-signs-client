@@ -1,0 +1,72 @@
+<div class="main">
+  <div class="container-fluid">
+    <section class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-7 col-sm-12">
+          <article class="title d-flex align-items-center flex-column">
+            <header>
+              <h2>Train and test the model</h2>
+            </header>
+            <p class="details">
+              Try this app with previously chosen images.
+              Load your own images from disk, or try a random image of our training dataset.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section class="container py-md-5">
+    <div class="row justify-content-around">
+      <div class="col-md-5 col-10 mb-5">
+        <div class="card-box">
+          <article class="mb-4">
+            <header class="mb-3">
+              <h3>Upload</h3>
+            </header>
+            <p class="details">Upload an image from your disk, and see if we can guess tha traffic sign on it.</p>
+          </article>
+          <div class="button-container">
+            <label for="image-upload" class="button">
+              <span>Upload image</span>  <i class="fa fa-cloud-upload"></i> 
+            </label>
+            <input id="image-upload" type="file"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 col-10 mb-5">
+        <div class="card-box">
+          <article class="mb-4">
+            <header class="mb-3">
+              <h3>Generate random</h3>
+            </header>
+            <p class="details">Try out an image of our dataset, that contains a traffic sign, and see how well does our model do.</p>
+          </article>
+          <div class="button-container">
+            <label for="image-upload" class="button">
+              <span>Random image</span>  <i class="fa fa-random"></i> 
+            </label>
+            <input id="image-upload" type="file"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <span class="separator"></span>
+  <section class="py-md-5 py-3 w-100">
+    <div class="container py-5">
+      <div class="row justify-content-around">
+        <div class="col-md-3 col-12">
+          <div class="image-holder">
+            <img class="chosen-image" src="https://via.placeholder.com/200x200?text=Your+image" alt="">
+          </div>
+        </div>
+        <div class="col-md-7 col-12">
+          <div class="card-box w-100">
+            <h3>Classification</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
