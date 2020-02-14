@@ -50,11 +50,14 @@
   --blue: #00ad9f;
   --light-blue: #00c2b2;
   --dark-blue: #00a396;
+  --dark: rgb(66, 80, 102);
   --white: #f8fafb;
   --red: rgb(190, 50, 50);
   --shadow: 2px 2px 14px -3px #0007;
+  --header-height: 3rem;
   --transition: all ease-in-out .2s;
   --gray: #0004;
+  --light: #0002;
 }
 body{
   background-color: var(--white);
@@ -66,7 +69,7 @@ a, a:hover{
   text-decoration: none;
 }
 
-button.button {
+.button {
   font-size: 20px;
   display: flex;
   align-items: center;
@@ -75,33 +78,35 @@ button.button {
   border: 0;
   border-radius: 4px;
   width: fit-content;
+  height: fit-content;
   padding: .5em 1.3em;
   font-weight: 600;
   color: var(--white);
   transition: var(--transition);
   box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 2px 4px 0 rgba(14,30,37,.12);
   text-align: center;
+  cursor: pointer;
 }
 
-button.button:hover {
+.button:hover {
   background-color: var(--light-blue);
 }
 
-button.button:hover i.fa {
+.button:hover i.fa {
   animation: jump-right .4s ease;
 }
 
-button.button:active {
+.button:active {
   background-color: var(--dark-blue);
 }
 
-button.button:not(.absolute) i.fa{
+.button:not(.absolute) i.fa{
   margin-left: 1rem;
   display: flex;
   align-items: center;
 }
 
-button.button:not(.absolute) .material-icons {
+.button:not(.absolute) .material-icons {
   margin-left: .6rem;
 }
 
