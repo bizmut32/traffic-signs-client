@@ -43,27 +43,47 @@
             <p class="details">Try out an image of our dataset, that contains a traffic sign, and see how well does our model do.</p>
           </article>
           <div class="button-container">
-            <label for="image-upload" class="button">
+            <button class="button">
               <span>Random image</span>  <i class="fa fa-random"></i> 
-            </label>
-            <input id="image-upload" type="file"/>
+            </button>
           </div>
         </div>
       </div>
     </div>
   </section>
   <span class="separator"></span>
-  <section class="py-md-5 py-3 w-100">
+  <section class="py-md-5 w-100">
     <div class="container py-5">
       <div class="row justify-content-around">
         <div class="col-md-3 col-12">
-          <div class="image-holder">
+          <div class="image-holder mb-5">
             <img class="chosen-image" src="https://via.placeholder.com/200x200?text=Your+image" alt="">
           </div>
         </div>
         <div class="col-md-7 col-12">
           <div class="card-box w-100">
-            <h3>Classification</h3>
+            <article>
+              <header class="mb-4">
+                <h3>Classification</h3>
+              </header>
+              <div class="container-fluid w-100">
+                <div class="row mb-4 justify-content-center align-items-center">
+                  <div class="col-8">
+                    <div class="classification-result">
+                      <span>Result</span>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-4">
+                    <span class="classification-accuracy">
+                      -%
+                    </span>
+                  </div>
+                </div>
+                <div class="row">
+                  <app-guess-chart [data] = "data"></app-guess-chart>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@
 }
 
 .title h1 {
-  font-size: 4rem;
+  font-size: 4.5rem;
   width: min-content;
   color: var(--white);
   text-shadow: 4px 4px 10px var(--gray);
@@ -90,6 +90,10 @@
     margin-right: 7%;
     margin-bottom: 4rem;
     bottom: 0;
+  }
+
+  .title h1 span {
+    font-size: 3rem;
   }
 
   section.main {

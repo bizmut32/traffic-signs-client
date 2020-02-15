@@ -44,3 +44,10 @@
 .header-item:hover {
   color: #222;
 }
+
+@media screen and (max-width: 450px) {
+  nav.main {
+    padding: 0 2rem;
+    justify-content: center;
+  }
+}

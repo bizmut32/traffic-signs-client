@@ -8,6 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { IndexComponent } from './index/index.component';
 import { PhotoComponentComponent } from './index/photo/photo.component';
 import { TrainTestComponent } from './index/train-test/train-test.component';
+import { GuessChartComponent } from './index/train-test/guess-chart/guess-chart.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TrainTestComponent } from './index/train-test/train-test.component';
     HeaderComponent,
     IndexComponent,
     PhotoComponentComponent,
-    TrainTestComponent
+    TrainTestComponent,
+    GuessChartComponent
   ],
   imports: [
     BrowserModule,
