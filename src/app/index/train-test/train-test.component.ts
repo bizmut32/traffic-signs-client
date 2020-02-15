@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import * as Chart from 'chart.js';
 
 @Component({
   selector: 'app-train-test',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainTestComponent implements OnInit {
 
+  data: number[];
   constructor() { }
 
   ngOnInit() {
