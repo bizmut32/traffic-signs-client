@@ -66,21 +66,24 @@
               <header class="mb-4">
                 <h3>Classification</h3>
               </header>
-              <div class="container-fluid w-100">
+              <div class="w-100">
                 <div class="row mb-4 justify-content-center align-items-center">
-                  <div class="col-8">
+                  <div class="col-md-8 col-9">
                     <div class="classification-result">
                       <span>Result</span>
                     </div>
                   </div>
-                  <div class="col-md-2 col-4">
+                  <div class="col-md-2 col-3">
                     <span class="classification-accuracy">
                       -%
                     </span>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mb-4">
                   <app-guess-chart [data] = "data"></app-guess-chart>
+                </div>
+                <div class="row justify-content-center">
+                  <span>Execution time: -ms</span>
                 </div>
               </div>
             </article>
