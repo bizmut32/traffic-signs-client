@@ -101,6 +101,16 @@ input[type="file"] {
   box-shadow: 0 0 1rem rgba(0,0,0,0.1);
 }
 
+.chosen-image-holder {
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.loading {
+  position: absolute;
+}
+
 .classification-result {
   background-color: var(--light);
   height: 3rem;
