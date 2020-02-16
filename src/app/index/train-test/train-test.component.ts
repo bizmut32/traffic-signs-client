@@ -32,8 +32,8 @@ export class TrainTestComponent implements OnInit {
     this.scrollToClassification();
 
     this.server.generateRandomImage()
-    .then(result => { this.showEvaluation(result); })
-    .finally(() => { this.stopLoading(); });
+      .then(result => { this.showEvaluation(result); })
+      .finally(() => { this.stopLoading(); });
   }
 
   async uploadImage() {
@@ -42,8 +42,8 @@ export class TrainTestComponent implements OnInit {
 
     const image = this.getImageFromFile();
     this.server.uploadImage(image)
-    .then(result => { this.showEvaluation(result); })
-    .finally(() => { this.stopLoading(); });
+      .then(result => { this.showEvaluation(result); })
+      .finally(() => { this.stopLoading(); });
   }
 
   startLoading() {
@@ -63,8 +63,8 @@ export class TrainTestComponent implements OnInit {
     const offsetPosition = elementPosition - offset;
 
     window.scrollTo({
-         top: offsetPosition,
-         behavior: 'smooth'
+      top: offsetPosition,
+      behavior: 'smooth'
     });
   }
 
@@ -72,7 +72,7 @@ export class TrainTestComponent implements OnInit {
     const evaluation = Evaluater.evaluateClassification(classification);
     this.evaluation = evaluation;
 
-    this.data = this.evaluation.accuracy.map ( value => (value - 0.5) * 95 * 2 );
+    this.data = this.evaluation.accuracy.map(value => (value - 0.5) * 95 * 2);
 
     this.image = classification.image.base64;
   }

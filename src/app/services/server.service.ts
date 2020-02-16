@@ -23,13 +23,4 @@ export class ServerService {
   public generateRandomImage(): Promise<ClassificationResult> {
     return new Request<ClassificationResult>(this.http).get('/image/random');
   }
-
-  private readImageFromProjectFolder(url: string): Promise<string> {
-    return new Promise(resolve => {
-      this.http.get('./assets/images/' + url,  {observe: 'response', responseType: 'blob'}).toPromise()
-      .then(async (result: HttpResponse<Blob>) => {
-        resolve(ImageConverter.fileToBase64(result.body));
-      });
-    });
-  }
 }
