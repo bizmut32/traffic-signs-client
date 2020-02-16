@@ -10,7 +10,7 @@ import { IndexComponent } from './index/index.component';
 import { PhotoComponentComponent } from './index/photo/photo.component';
 import { TrainTestComponent } from './index/train-test/train-test.component';
 import { GuessChartComponent } from './index/train-test/guess-chart/guess-chart.component';
-import { PercentagePipe } from './pipes/percentage.pipe';
+import { NumberPipe } from './pipes/number.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,7 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     PhotoComponentComponent,
     TrainTestComponent,
     GuessChartComponent,
-    PercentagePipe,
+    NumberPipe,
     LoadingComponent
   ],
   imports: [
