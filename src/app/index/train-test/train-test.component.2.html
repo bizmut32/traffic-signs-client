@@ -43,7 +43,7 @@
             <p class="details">Try out an image of our dataset, that contains a traffic sign, and see how well does our model do.</p>
           </article>
           <div class="button-container">
-            <button class="button">
+            <button class="button" (click)="randomImage()">
               <span>Random image</span>  <i class="fa fa-random"></i> 
             </button>
           </div>
@@ -52,12 +52,13 @@
     </div>
   </section>
   <span class="separator"></span>
-  <section class="py-md-5 w-100">
+  <section class="py-md-5 w-100" #classification>
     <div class="container py-5">
       <div class="row justify-content-around">
         <div class="col-md-3 col-12">
-          <div class="image-holder mb-5">
-            <img class="chosen-image" src="https://via.placeholder.com/200x200?text=Your+image" alt="">
+          <div class="chosen-image-holder image-holder mb-5">
+            <img @appear *ngIf="!loading" class="chosen-image" [src]="image" alt="">
+            <app-loading class="loading" [loading]="loading"></app-loading>
           </div>
         </div>
         <div class="col-md-7 col-12">
@@ -70,20 +71,20 @@
                 <div class="row mb-4 justify-content-center align-items-center">
                   <div class="col-md-8 col-9">
                     <div class="classification-result">
-                      <span>Result</span>
+                      <span>{{ evaluation ? evaluation.topGuess.signName : 'Result' }}</span>
                     </div>
                   </div>
                   <div class="col-md-2 col-3">
                     <span class="classification-accuracy">
-                      -%
+                      {{ evaluation ? (evaluation.topGuess.accuracy | percentage) : '-' }}%
                     </span>
                   </div>
                 </div>
                 <div class="row mb-4">
-                  <app-guess-chart [data] = "data"></app-guess-chart>
+                  <app-guess-chart [data] = "{data: data, selectedRow: evaluation ? evaluation.topGuess.index : -1}"></app-guess-chart>
                 </div>
                 <div class="row justify-content-center">
-                  <span>Execution time: -ms</span>
+                  <span>Execution time: {{evaluation ? evaluation.executionTime : '-'}}ms</span>
                 </div>
               </div>
             </article>

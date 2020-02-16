@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { ChartData } from 'chart.js';
 import * as Chart from 'chart.js';
 
+export interface GuessChartData {
+  data: number[];
+  selectedRow: number;
+}
 @Component({
   selector: 'app-guess-chart',
   template: `<canvas #chart></canvas>`,
@@ -11,8 +14,8 @@ export class GuessChartComponent implements OnInit {
 
   @ViewChild('chart') chartElement: ElementRef<HTMLCanvasElement>;
 
-  private _data: number[] = [];
-  @Input() set data(value: number[]) {
+  private _data: GuessChartData = { data: [], selectedRow: -1 };
+  @Input() set data(value: GuessChartData) {
     this._data = value;
     this.initializeChart();
   }
@@ -22,17 +25,21 @@ export class GuessChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.chart = new Chart(this.chartElement.nativeElement.getContext('2d'), this.chartData);
+    this.chart = new Chart(this.chartElement.nativeElement.getContext('2d'), this.chartData());
     this.initializeChart();
   }
 
   initializeChart() {
     if (this.chart === undefined) return;
-    this.chart.data.datasets.forEach(ds => { ds.data = this._data; });
+    this.chart.data.datasets.forEach(ds => {
+      ds.data = this.data.data;
+      ds.backgroundColor = this.getBackgroundColors();
+      ds.borderColor = this.getBorderColors();
+    });
     this.chart.update();
   }
 
-  get chartData() {
+  chartData() {
     const labels = [];
     for (let i = 0; i < 44; ++i)
       labels.push(i);
@@ -42,23 +49,9 @@ export class GuessChartComponent implements OnInit {
         labels,
         datasets: [{
           label: 'Certainty',
-          data: this.data,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
+          data: this.data.data,
+          backgroundColor: this.getBackgroundColors(43, this.data.selectedRow, 'rgba(255, 99, 132, 0.2)'),
+          borderColor: this.getBorderColors(43, this.data.selectedRow, 'rgba(255, 99, 132, 1)'),
           borderWidth: 1
         }]
       },
@@ -76,5 +69,23 @@ export class GuessChartComponent implements OnInit {
         }
       }
     };
+  }
+
+  getBackgroundColors(
+    numberOfBars: number = 43, numberOfColoredBar: number = this.data.selectedRow, color: string = 'rgba(255, 99, 132, 0.2)'
+    ) {
+    const result = new Array(numberOfBars).fill('rgba(0, 0, 0, 0.1)');
+    if (numberOfColoredBar !== -1)
+      result[numberOfColoredBar] = color;
+    return result;
+  }
+
+  getBorderColors(
+    numberOfBars: number = 43, numberOfColoredBar: number = this.data.selectedRow, color: string = 'rgba(255, 99, 132, 0.7)'
+    ) {
+    const result = new Array(numberOfBars).fill('rgba(0, 0, 0, 0.5)');
+    if (numberOfColoredBar !== -1)
+      result[numberOfColoredBar] = color;
+    return result;
   }
 }
