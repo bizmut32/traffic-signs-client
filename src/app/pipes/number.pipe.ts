@@ -6,9 +6,9 @@ export class PercentagePipeOptions {
 }
 
 @Pipe({
-  name: 'percentage'
+  name: 'number'
 })
-export class PercentagePipe implements PipeTransform {
+export class NumberPipe implements PipeTransform {
 
   transform(value: number, options: PercentagePipeOptions = new PercentagePipeOptions()): string {
     const scaleFactor = this.pow(10, options.digits);

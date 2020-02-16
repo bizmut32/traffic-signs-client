@@ -9,6 +9,13 @@
   box-shadow: var(--shadow);
   transition: var(--transition);
   padding: 0 4rem;
+  
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .header-item {

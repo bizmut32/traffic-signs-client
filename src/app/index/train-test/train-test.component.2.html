@@ -30,7 +30,7 @@
             <label for="image-upload" class="button">
               <span>Upload image</span>  <i class="fa fa-cloud-upload"></i> 
             </label>
-            <input id="image-upload" type="file"/>
+            <input id="image-upload" type="file" #imageUploadInput (change)="uploadImage()"/>
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@
                   </div>
                   <div class="col-md-2 col-3">
                     <span class="classification-accuracy">
-                      {{ evaluation ? (evaluation.topGuess.accuracy | percentage) : '-' }}%
+                      {{ evaluation ? (evaluation.topGuess.accuracy | number) : '-' }}%
                     </span>
                   </div>
                 </div>

@@ -1,9 +1,22 @@
-import { ClassificationResult, EvaluationResult, signNames } from './classification-result.model';
+import { ClassificationResult, signNames } from './common-interface';
 
 interface MaxGuess {
   index: number;
   value: number;
 }
+
+export interface Guess {
+  index: number;
+  signName: string;
+  accuracy: number;
+}
+
+export interface EvaluationResult {
+  accuracy: number[];
+  executionTime: number;
+  topGuess: Guess;
+}
+
 
 export class Evaluater {
 

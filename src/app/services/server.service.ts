@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { EvaluationResult, ClassificationResult } from '../model/classification-result.model';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { ImageConverter } from '../model/image-converter.model';
+import { ClassificationResult, ClassifiedImage } from '../model/common-interface';
+import { Request } from 'src/app/model/request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,40 +11,24 @@ export class ServerService {
 
   constructor(private http: HttpClient) { }
 
-  static getBase64(file): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result.toString());
-      reader.onerror = error => reject(error);
-    });
-  }
-
-  public uploadImage(): Promise<ClassificationResult> {
-    const guesses = [];
-    for (let i = 0; i < 43; ++i)
-      guesses.push(Math.random() * 0.8);
-    guesses[1] = 0.98345;
-
-    return new Promise(async resolve => {
-      this.readImageFromProjectFolder('40.jpg')
-      .then(async image => {
-        setTimeout(() => {
-          resolve({image: {base64: image}, guesses, executionTime: 123});
-        }, 1500);
-      });
+  public uploadImage(image: File): Promise<ClassificationResult> {
+    return new Promise(async (resolve, reject) => {
+      const compressedImage = await ImageConverter.compressImage(image);
+      const base64Image = await ImageConverter.fileToBase64(compressedImage);
+      const result = new Request<ClassificationResult>(this.http).post('/image', {image: base64Image});
+      resolve(result);
     });
   }
 
   public generateRandomImage(): Promise<ClassificationResult> {
-    return this.uploadImage();
+    return new Request<ClassificationResult>(this.http).get('/image/random');
   }
 
   private readImageFromProjectFolder(url: string): Promise<string> {
     return new Promise(resolve => {
       this.http.get('./assets/images/' + url,  {observe: 'response', responseType: 'blob'}).toPromise()
       .then(async (result: HttpResponse<Blob>) => {
-        resolve(ServerService.getBase64(result.body));
+        resolve(ImageConverter.fileToBase64(result.body));
       });
     });
   }

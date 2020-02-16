@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as Chart from 'chart.js';
 import { ServerService } from 'src/app/services/server.service';
-import { ClassificationResult, EvaluationResult, ClassifiedImage } from 'src/app/model/classification-result.model';
-import { Evaluater } from 'src/app/model/evaluater.model';
+import { Evaluater, EvaluationResult } from 'src/app/model/evaluater.model';
 import { animation } from 'src/app/components/animations';
+import { ImageConverter } from 'src/app/model/image-converter.model';
+import { ClassificationResult } from 'src/app/model/common-interface';
 
 @Component({
   selector: 'app-train-test',
@@ -19,25 +20,28 @@ export class TrainTestComponent implements OnInit {
 
   loading: boolean = false;
   @ViewChild('classification') classificationSection: ElementRef<HTMLElement>;
+  @ViewChild('imageUploadInput') imageUploadInput: ElementRef<HTMLInputElement>;
+
   constructor(private server: ServerService) { }
 
   ngOnInit() {
-  }
-
-  uploadImage() {
-    this.startLoading();
-    this.scrollToClassification();
-
-    this.server.uploadImage()
-    .then(result => { this.showEvaluation(result); })
-    .finally(() => { this.stopLoading(); });
   }
 
   randomImage() {
     this.startLoading();
     this.scrollToClassification();
 
-    this.server.uploadImage()
+    this.server.generateRandomImage()
+    .then(result => { this.showEvaluation(result); })
+    .finally(() => { this.stopLoading(); });
+  }
+
+  async uploadImage() {
+    this.startLoading();
+    this.scrollToClassification();
+
+    const image = this.getImageFromFile();
+    this.server.uploadImage(image)
     .then(result => { this.showEvaluation(result); })
     .finally(() => { this.stopLoading(); });
   }
@@ -62,8 +66,6 @@ export class TrainTestComponent implements OnInit {
          top: offsetPosition,
          behavior: 'smooth'
     });
-
-    // this.classificationSection.nativeElement.scrollIntoView({behavior: 'smooth'});
   }
 
   showEvaluation(classification: ClassificationResult) {
@@ -73,5 +75,11 @@ export class TrainTestComponent implements OnInit {
     this.data = this.evaluation.accuracy.map ( value => (value - 0.5) * 95 * 2 );
 
     this.image = classification.image.base64;
+  }
+
+  getImageFromFile(): File {
+    const files: FileList = this.imageUploadInput.nativeElement.files;
+    const file: File = files[0];
+    return file;
   }
 }
