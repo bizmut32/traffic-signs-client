@@ -12,8 +12,8 @@ export class ImageConverter {
 
   static compressImage(image: File) {
     return imageCompression(image, {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920,
+      maxSizeMB: 0.5,
+      maxWidthOrHeight: 500,
       useWebWorker: true
     });
   }
