@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Response, Success, Error } from './response.model';
 
-const API = 'https://traffic-signs-server.herokuapp.com/';
+const API = 'https://traffic-signs-server.herokuapp.com';
 
 export class Request<ResultType = any> {
   private url: string;
