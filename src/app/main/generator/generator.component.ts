@@ -5,19 +5,27 @@ interface Point {
   y: number;
 }
 class Rectangle {
-  top: Point;
-  bottom: Point;
+  from: Point;
+  to: Point;
 
   get width(): number {
-    return Math.abs(this.bottom.x  - this.top.x);
+    return Math.abs(this.to.x  - this.from.x);
   }
 
   get height(): number {
-    return Math.abs(this.bottom.y  - this.top.y);
+    return Math.abs(this.to.y  - this.from.y);
   }
 
   get center(): Point {
-    return { x: this.top.x + this.width / 2, y: this.top.y + this.height / 2 };
+    return { x: (this.from.x + this.to.x) / 2, y: (this.from.y + this.to.y) / 2 };
+  }
+
+  get top(): number {
+    return Math.min(this.from.y, this.to.y);
+  }
+
+  get left(): number {
+    return Math.min(this.from.x, this.to.x);
   }
 }
 
@@ -84,13 +92,14 @@ export class GeneratorComponent {
   startRect(event: MouseEvent) {
     event.preventDefault();
     this.currentRectangle = new Rectangle();
-    this.currentRectangle.top = { x: event.offsetX, y: event.offsetY };
-    this.currentRectangle.bottom = { x: event.offsetX, y: event.offsetY };
+    this.currentRectangle.from = { x: event.offsetX, y: event.offsetY };
+    this.currentRectangle.to = { x: event.offsetX, y: event.offsetY };
   }
 
   drawRect(event: MouseEvent) {
     if (!this.currentRectangle) return;
-    this.currentRectangle.bottom = { x: event.offsetX, y: event.offsetY };
+    this.currentRectangle.to = { x: event.offsetX, y: event.offsetY };
+    event.stopPropagation();
   }
 
   endRect(event: MouseEvent) {

@@ -159,6 +159,11 @@
 	box-shadow: var(--shadow);
 	border-radius: .5rem;
 	box-sizing: content-box;
+    pointer-events: none;
+  }
+
+  .rectangle > * {
+	pointer-events: all;
   }
 
   .rectangle i.fa.fa-close {
