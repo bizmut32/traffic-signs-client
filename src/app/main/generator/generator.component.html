@@ -1,0 +1,95 @@
+<div class="main">
+  <div class="container-fluid">
+    <section class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-7 col-sm-12">
+          <article class="title d-flex align-items-center flex-column">
+            <header>
+              <h2>Data generator</h2>
+            </header>
+            <p class="details">
+              Load images from disk and select a specified areo save as training or testing data
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section class="container py-md-3">
+    <div class="row justify-content-around">
+      <div class="col-md-5 col-10 mb-3">
+        <div class="card-box">
+          <article class="mb-4">
+            <header>
+              <h3>Select images</h3>
+            </header>
+          </article>
+          <div class="button-container">
+            <label for="image-upload" class="button">
+              <span>Upload images</span>  <i class="fa fa-cloud-upload"></i> 
+            </label>
+            <input id="image-upload" multiple accept="image/x-png,image/gif,image/jpeg" type="file" #imageUploadInput (change)="initImages()">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 col-10 mb-3">
+        <div class="card-box">
+          <article class="mb-4">
+            <header>
+              <h3>Save generated data</h3>
+            </header>
+          </article>
+          <div class="button-container">
+            <button class="button" (click)="saveData()">
+              <span>Save</span>  <i class="fa fa-download"></i> 
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <span class="separator"></span>
+  <section class="py-md-5 w-100" #classification>
+    <div class="container-fluid px-3">
+      <div class="row justify-content-around">
+        <div class="col-12">
+          <div class="card-box container-fluid" *ngIf="images != null">
+            <div class="row">
+              <div class="col-1 d-flex align-items-center justify-content-center">
+                <div class="arrow" (click)="prev()">
+                  <i class="fa fa-chevron-left"></i>
+                </div>
+              </div>
+              <div class="col-10">
+                <div class="image-holder image-display">
+                  <img class="image" #imageDisplay (mousedown)="startRect($event)" (mouseup)="endRect($event)" (mousemove)="drawRect($event)">
+                  <div *ngFor="let rectangle of images[currentImageIndex].signs; let i = index" 
+                    class="rectangle" 
+                    [ngStyle]="{
+                    'top': rectangle.top.y + 'px',
+                    'left': rectangle.top.x + 'px',
+                    'width': rectangle.width + 'px',
+                    'height': rectangle.height + 'px'}">
+                  <i class="fa fa-close" (click)="removeRect(i)"></i>
+                </div>
+                  <div *ngIf="currentRectangle != null" class="rectangle" (mouseup)="endRect($event)" [ngStyle]="{
+                    'top': currentRectangle.top.y + 'px',   
+                    'left': currentRectangle.top.x + 'px',
+                    'width': currentRectangle.width + 'px',
+                    'height': currentRectangle.height + 'px'
+                  }"></div>
+                  
+                </div>
+              </div>
+              <div class="col-1 d-flex align-items-center justify-content-center">
+                <div class="arrow" (click)="next()">
+                  <i class="fa fa-chevron-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
