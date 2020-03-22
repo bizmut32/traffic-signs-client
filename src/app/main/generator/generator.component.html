@@ -66,15 +66,15 @@
                   <div *ngFor="let rectangle of images[currentImageIndex].signs; let i = index" 
                     class="rectangle" 
                     [ngStyle]="{
-                    'top': rectangle.top.y + 'px',
-                    'left': rectangle.top.x + 'px',
+                    'top': rectangle.top + 'px',
+                    'left': rectangle.left + 'px',
                     'width': rectangle.width + 'px',
                     'height': rectangle.height + 'px'}">
                   <i class="fa fa-close" (click)="removeRect(i)"></i>
                 </div>
-                  <div *ngIf="currentRectangle != null" class="rectangle" (mouseup)="endRect($event)" [ngStyle]="{
-                    'top': currentRectangle.top.y + 'px',   
-                    'left': currentRectangle.top.x + 'px',
+                  <div *ngIf="currentRectangle != null" class="rectangle" (mousemove)="drawRect($event)" [ngStyle]="{
+                    'top': currentRectangle.top + 'px',   
+                    'left': currentRectangle.left + 'px',
                     'width': currentRectangle.width + 'px',
                     'height': currentRectangle.height + 'px'
                   }"></div>
