@@ -11,8 +11,7 @@ export class DetectionComponent implements OnInit {
   @Input() image: string;
   @Input() detection: Detection;
   @ViewChild('imageCanvas') canvas: ElementRef<HTMLCanvasElement>;
-
-  w: number; h: number;
+  @ViewChild('image') imageEl: ElementRef<HTMLImageElement>;
 
   constructor() { }
 
@@ -21,13 +20,15 @@ export class DetectionComponent implements OnInit {
 
     const { topLeft: { x, y }, bottomRight: { x: x2, y: y2 }} = this.detection.boundingBox;
     const w = x2 - x, h = y2 - y;
-    this.w = w, this.h = h;
     this.canvas.nativeElement.width = w;
     this.canvas.nativeElement.height = h;
 
     const image = new Image();
+    const imageEl = this.imageEl;
+    const canvas = this.canvas;
     image.onload = function() {
       ctx.drawImage(image, x, y, w, h, 0, 0, w, h);
+      imageEl.nativeElement.src = canvas.nativeElement.toDataURL();
     };
     image.src = this.image;
   }

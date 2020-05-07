@@ -20,6 +20,10 @@ export class ServerService {
     });
   }
 
+  public classifyImage(image: string): Promise<ImageDetection> {
+      return new Request<ImageDetection>(this.http).post('/image', {image});
+  }
+
   public classifyRandomImage(): Promise<ImageDetection> {
     return new Request<ImageDetection>(this.http).get('/image/random');
   }

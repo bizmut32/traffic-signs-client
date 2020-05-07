@@ -1,17 +1,28 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { ServerService } from 'src/app/services/server.service';
+import { ImageDetection, Detection } from 'src/app/model/common-interface';
+import { animation } from 'src/app/components/animations';
+
+interface StampedObject extends Detection {
+  image: string;
+  timeStamp: number;
+}
 
 @Component({
   selector: 'app-photo',
   templateUrl: './photo.component.html',
-  styleUrls: ['./photo.component.css']
+  styleUrls: ['./photo.component.css'],
+  animations: [ animation() ]
 })
-export class PhotoComponentComponent implements OnInit {
-
+export class PhotoComponentComponent implements OnInit, OnDestroy {
+  readonly zoomFactor = 1.5;
   @ViewChild('photoCanvas') photoCanvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('cameraView') cameraView: ElementRef<HTMLVideoElement>;
-  @ViewChild('takenPhoto') takenPhoto: ElementRef<HTMLImageElement>;
 
-  constructor() { }
+  detections: StampedObject[] = [];
+  running: boolean = false;
+
+  constructor(private server: ServerService) { }
 
   ngOnInit() {
     this.initializeCamera();
@@ -29,10 +40,43 @@ export class PhotoComponentComponent implements OnInit {
   }
 
   takePhoto() {
-    this.photoCanvas.nativeElement.width = this.cameraView.nativeElement.videoWidth;
-    this.photoCanvas.nativeElement.height = this.cameraView.nativeElement.videoHeight;
-    this.photoCanvas.nativeElement.getContext('2d').drawImage(this.cameraView.nativeElement, 0, 0);
-    this.takenPhoto.nativeElement.src = this.photoCanvas.nativeElement.toDataURL('image/webp');
-    this.takenPhoto.nativeElement.classList.add('taken');
+    return new Promise(async resolve => {
+      const { videoWidth: w, videoHeight: h } = this.cameraView.nativeElement;
+      this.photoCanvas.nativeElement.width = w;
+      this.photoCanvas.nativeElement.height = h;
+      this.photoCanvas.nativeElement.getContext('2d').drawImage(this.cameraView.nativeElement, 0, 0, w, h);
+      await this.manageDetection();
+      return resolve();
+    });
+  }
+
+  manageDetection() {
+    return new Promise(async resolve => {
+      const imageBase64 = this.photoCanvas.nativeElement.toDataURL();
+      const detection = await this.server.classifyImage(imageBase64);
+      this.detections.push(...detection.objects.map (object => {
+        return { ...object, image: detection.image.base64, timeStamp: Date.now() };
+      }));
+      resolve();
+    });
+  }
+
+  async startDetections() {
+    while (this.running) {
+      await this.takePhoto();
+      this.detections = this.detections.filter(object => Date.now() - object.timeStamp < 3000);
+    }
+  }
+
+  toggleDetections() {
+    if (this.running) this.running = false;
+    else {
+      this.running = true;
+      this.startDetections();
+    }
+  }
+
+  ngOnDestroy() {
+    this.running = false;
   }
 }

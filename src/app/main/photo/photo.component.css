@@ -34,6 +34,10 @@
   object-fit: cover;
 }
 
+.photo-canvas {
+  display: none;
+}
+
 .camera-button{
   width: 80vw;
   position: absolute;
@@ -51,6 +55,20 @@
   right: 20px;
   z-index: 2;
   transition: var(--transition);
+}
+
+.detections {
+  border-radius: 6px;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  position: absolute;
+}
+
+.detection {
+  margin-bottom: 20px;
+  width: 10rem;
+  height: 10rem;
 }
 
 .taken:hover {

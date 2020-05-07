@@ -1,5 +1,6 @@
-<div class="image" [ngStyle]="{width: w + 'px', height: h + 'px'}">
-  <canvas #imageCanvas></canvas>
+<div class="image image-holder">
+  <canvas #imageCanvas style="display:none"></canvas>
+  <img #image>
   <div class="label">
     <span>{{ detection.classification.label }}</span>
   </div>

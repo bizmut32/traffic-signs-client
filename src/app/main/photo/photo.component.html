@@ -6,9 +6,12 @@
   </nav>
   <canvas class="photo-canvas" id="camera--sensor" #photoCanvas></canvas>
   <video class="camera-view" id="camera--view" autoplay playsinline #cameraView></video>
-  <img src="//:0" alt="" class="taken-photo" id="camera--output" #takenPhoto>
-  <button class="button camera-button" id="camera--trigger" (click)="takePhoto()">
-    <i class="fa fa-camera"></i>
-    Take a picture
+  <div class="detections">
+    <div class="detection image-holder" @appear *ngFor="let object of detections" >
+      <app-detection [detection]="object" [image]="object.image"></app-detection>
+    </div>
+  </div>
+  <button class="button camera-button" (click)="toggleDetections()" [ngClass]="{'red': running}">
+    <span>{{ running ? 'Stop' : 'Start' }} object detection</span>
   </button>
 </section>
