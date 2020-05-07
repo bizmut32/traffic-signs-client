@@ -68,23 +68,23 @@
                 <h3>Classification</h3>
               </header>
               <div class="w-100">
-                <div class="row mb-4 justify-content-center align-items-center">
-                  <div class="col-md-8 col-9">
+                <div class="row mb-4 justify-content-center align-items-center" *ngFor="let object of detection?.objects || []">
+                  <div class="col-md-7">
                     <div class="classification-result">
-                      <span>{{ evaluation ? evaluation.topGuess.signName : 'Result' }}</span>
+                      <span>{{ object.classification.label || '' }}</span>
                     </div>
                   </div>
-                  <div class="col-md-2 col-3">
+                  <div class="col-md-auto">
                     <span class="classification-accuracy">
-                      {{ evaluation ? (evaluation.topGuess.accuracy | number) : '-' }}%
+                      {{ object.certainty }} %
                     </span>
                   </div>
                 </div>
-                <div class="row mb-4">
-                  <app-guess-chart [data] = "{data: data, selectedRow: evaluation ? evaluation.topGuess.index : -1}"></app-guess-chart>
+                <div class="row mb-4 justify-content-center" *ngIf="!!detection">
+                  <app-classified-image [classification]="detection"></app-classified-image>
                 </div>
                 <div class="row justify-content-center">
-                  <span>Execution time: {{evaluation ? evaluation.executionTime : '-'}}ms</span>
+                  <span>Execution time: {{ detection?.executionTime || '-'}}ms</span>
                 </div>
               </div>
             </article>

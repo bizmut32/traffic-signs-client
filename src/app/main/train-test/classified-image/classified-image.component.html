@@ -1,0 +1,9 @@
+<div class="image">
+    <img [src]="detection?.image?.base64 || ''" alt="">
+    <div class="fader"></div>
+    <app-detection class="sign" *ngFor="let bb of boundingBoxes; let i = index"
+        [image]="detection?.image?.base64 || ''"
+        [detection]="detection.objects[i]"
+        [ngStyle]="{top: bb.y + 'px', left: bb.x + 'px'}"
+    ></app-detection>
+</div>

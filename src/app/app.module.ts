@@ -14,6 +14,8 @@ import { NumberPipe } from './pipes/number.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GeneratorComponent } from './main/generator/generator.component';
+import { ClassifiedImageComponent } from './main/train-test/classified-image/classified-image.component';
+import { DetectionComponent } from './main/detection/detection.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { GeneratorComponent } from './main/generator/generator.component';
     GuessChartComponent,
     NumberPipe,
     LoadingComponent,
-    GeneratorComponent
+    GeneratorComponent,
+    ClassifiedImageComponent,
+    DetectionComponent
   ],
   imports: [
     BrowserModule,
