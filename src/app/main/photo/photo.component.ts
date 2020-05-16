@@ -44,7 +44,9 @@ export class PhotoComponentComponent implements OnInit, OnDestroy {
       const { videoWidth: w, videoHeight: h } = this.cameraView.nativeElement;
       this.photoCanvas.nativeElement.width = w;
       this.photoCanvas.nativeElement.height = h;
-      this.photoCanvas.nativeElement.getContext('2d').drawImage(this.cameraView.nativeElement, 0, 0, w, h);
+      const ctx = this.photoCanvas.nativeElement.getContext('2d');
+      ctx.drawImage(this.cameraView.nativeElement, 0, 0, w, h);
+      ctx.scale(-1, 1);
       await this.manageDetection();
       return resolve();
     });
@@ -65,6 +67,7 @@ export class PhotoComponentComponent implements OnInit, OnDestroy {
     while (this.running) {
       await this.takePhoto();
       this.detections = this.detections.filter(object => Date.now() - object.timeStamp < 3000);
+      console.log(this.detections);
     }
   }
 

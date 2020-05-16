@@ -112,10 +112,6 @@ input[type="file"] {
   height: fit-content;
 }
 
-.loading {
-  position: absolute;
-}
-
 .classification-result {
   background-color: var(--light);
   height: 3rem;
