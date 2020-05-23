@@ -25,6 +25,6 @@ export class ServerService {
   }
 
   public classifyRandomImage(): Promise<ImageDetection> {
-    return new Request<ImageDetection>(this.http).get('/image/random');
+    return new Request<ImageDetection>(this.http).post('/image/random');
   }
 }
