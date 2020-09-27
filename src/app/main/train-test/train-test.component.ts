@@ -67,9 +67,11 @@ export class TrainTestComponent implements OnInit {
 
 
   showEvaluation(result: ImageDetection) {
+    console.log(result);
+
     this.image = result.image.base64;
     this.detection = { ...result, objects: result.objects.map(
-      object => ({ ...object, certainty: Math.round(object.certainty * 10000) / 100.0})
+      object => ({ ...object, confidence: Math.round(object.confidence * 10000) / 100.0})
     )};
   }
 

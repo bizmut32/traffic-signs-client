@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Response, Success, Error } from './response.model';
+import { ErrorResponse } from './response.model';
 
-const API = 'http://localhost:3000';
+const API = 'http://localhost:8080';
 
 export class Request<ResultType = any> {
   private url: string;
@@ -18,9 +18,9 @@ export class Request<ResultType = any> {
     this.url = url;
     this.method = 'get';
     return new Promise((resolve, reject) => {
-      this.http.get<Response<ResultType>>(API + url, { headers: this.headers }).subscribe(
+      this.http.get<ResultType>(API + url, { headers: this.headers }).subscribe(
         result => {
-          this.success(result, resolve, reject);
+          resolve(result);
         },
         error => {
           this.fail(error.error, reject);
@@ -34,9 +34,9 @@ export class Request<ResultType = any> {
     this.method = 'post';
     this.data = data;
     return new Promise((resolve, reject) => {
-      this.http.post<Response<ResultType>>(API + url, data, { headers: this.headers }).subscribe(
+      this.http.post<ResultType>(API + url, data, { headers: this.headers }).subscribe(
         result => {
-          this.success(result, resolve, reject);
+          resolve(result);
         },
         error => {
           console.log(error);
@@ -51,9 +51,9 @@ export class Request<ResultType = any> {
     this.method = 'patch';
     this.data = data;
     return new Promise((resolve, reject) => {
-      this.http.patch<Response<ResultType>>(API + url, data, { headers: this.headers }).subscribe(
+      this.http.patch<ResultType>(API + url, data, { headers: this.headers }).subscribe(
         result => {
-          this.success(result, resolve, reject);
+          resolve(result);
         },
         error => {
           this.fail(error.error, reject);
@@ -67,9 +67,9 @@ export class Request<ResultType = any> {
     this.method = 'put';
     this.data = data;
     return new Promise((resolve, reject) => {
-      this.http.put<Response<ResultType>>(API + url, data, { headers: this.headers }).subscribe(
+      this.http.put<ResultType>(API + url, data, { headers: this.headers }).subscribe(
         result => {
-          this.success(result, resolve, reject);
+          resolve(result);
         },
         error => {
           this.fail(error.error, reject);
@@ -82,9 +82,9 @@ export class Request<ResultType = any> {
     this.url = url;
     this.method = 'delete';
     return new Promise((resolve, reject) => {
-      this.http.delete<Response>(API + url, { headers: this.headers }).subscribe(
+      this.http.delete<ResultType>(API + url, { headers: this.headers }).subscribe(
         result => {
-          this.success(result, resolve, reject);
+          resolve(result);
         },
         error => {
           this.fail(error.error, reject);
@@ -93,12 +93,8 @@ export class Request<ResultType = any> {
     });
   }
 
-  private success(result: Response, resolve, reject) {
-    if (result.error) return reject((result as Error).message);
-    resolve((result as Success<ResultType>).data);
-  }
 
-  private fail(result: Error, reject) {
+  private fail(result: ErrorResponse, reject) {
     console.log(result);
     console.log(this);
 
