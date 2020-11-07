@@ -1,7 +1,5 @@
 .image {
-    overflow: hidden;
     position: relative;
-    border-radius: 1rem;
     box-shadow: var(--shadow);
     cursor: pointer;
 }
@@ -24,6 +22,10 @@
     font-weight: 600;
 }
 
+.detected-image {
+    border-radius: .6rem;
+}
+
 .image .label span {
     transform: scale(.8);
     transition: var(--transition);
@@ -35,4 +37,13 @@
 
 .imagge:hover .label span {
     transform: scale(1);
+}
+
+.sign-icon {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 2em;
+    height: 2em;
+    z-index: 20;
 }
