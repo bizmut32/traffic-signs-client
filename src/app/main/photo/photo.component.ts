@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { ServerService } from 'src/app/services/server.service';
 import { ImageDetection, Detection } from 'src/app/model/common-interface';
 import { animation } from 'src/app/components/animations';
+import { GPSService } from 'src/app/services/gps.service';
 
 interface StampedObject extends Detection {
   image: string;
@@ -22,7 +23,7 @@ export class PhotoComponentComponent implements OnInit, OnDestroy {
   detections: StampedObject[] = [];
   running: boolean = false;
 
-  constructor(private server: ServerService) { }
+  constructor(private server: ServerService, private gps: GPSService) { }
 
   ngOnInit() {
     this.initializeCamera();
@@ -55,7 +56,7 @@ export class PhotoComponentComponent implements OnInit, OnDestroy {
   manageDetection() {
     return new Promise(async resolve => {
       const imageBase64 = this.photoCanvas.nativeElement.toDataURL();
-      const detection = await this.server.classifyImage(imageBase64);
+      const detection = await this.server.classifyImage({image: imageBase64, ...this.gps.location.value});
       this.detections.push(...detection.objects.map (object => {
         return { ...object, image: detection.image.base64, timeStamp: Date.now() };
       }));

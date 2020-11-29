@@ -23,9 +23,9 @@ export interface BoundingBox {
 }
 
 export interface Detection {
-  boundingBox: BoundingBox;
+  boundingBox?: BoundingBox;
   classification: Classification;
-  certainty: number;
+  confidence: number;
 }
 
 export interface ImageDetection {

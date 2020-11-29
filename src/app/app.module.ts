@@ -17,7 +17,6 @@ import { GeneratorComponent } from './main/generator/generator.component';
 import { ClassifiedImageComponent } from './main/train-test/classified-image/classified-image.component';
 import { DetectionComponent } from './main/detection/detection.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

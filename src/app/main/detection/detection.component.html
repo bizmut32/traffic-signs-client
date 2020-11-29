@@ -1,6 +1,7 @@
 <div class="image image-holder">
   <canvas #imageCanvas style="display:none"></canvas>
-  <img #image>
+  <img #image class="detected-image">
+  <img class="sign-icon" [src]="'/assets/images/sign-icons/' + detection.classification.serial + '.png'" [alt]="detection.classification.label">
   <div class="label">
     <span>{{ detection.classification.label }}</span>
   </div>
