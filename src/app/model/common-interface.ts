@@ -23,7 +23,7 @@ export interface BoundingBox {
 }
 
 export interface Detection {
-  boundingBox: BoundingBox;
+  boundingBox?: BoundingBox;
   classification: Classification;
   confidence: number;
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ImageConverter } from '../model/image-converter.model';
-import { ImageDetection, Detection } from '../model/common-interface';
+import { ImageDetection } from '../model/common-interface';
 import { Request } from 'src/app/model/request.model';
 
 @Injectable({
@@ -20,8 +20,12 @@ export class ServerService {
     });
   }
 
-  public classifyImage(image: string): Promise<ImageDetection> {
-      return new Request<ImageDetection>(this.http).post('/image', {image});
+  public classifyImage(data: {image: string, lat: number, lon: number}): Promise<ImageDetection> {
+    return new Request<ImageDetection>(this.http).post('/image', data);
+  }
+
+  public classifyStaticImage(image: string): Promise<ImageDetection> {
+      return new Request<ImageDetection>(this.http).post('/image/static', {image});
   }
 
   public classifyRandomImage(): Promise<ImageDetection> {
