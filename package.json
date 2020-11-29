@@ -24,7 +24,7 @@
     "@ng-web-apis/geolocation": "^1.0.3",
     "@types/chart.js": "^2.9.28",
     "bootstrap": "^4.5.3",
-    "browser-image-compression": "^1.0.13",
+    "browser-image-compression": "1.0.6",
     "chart.js": "^2.9.4",
     "core-js": "^2.6.12",
     "font-awesome": "^4.7.0",
