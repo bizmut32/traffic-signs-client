@@ -15,7 +15,7 @@ export class ServerService {
     return new Promise(async (resolve, reject) => {
       const compressedImage = await ImageConverter.compressImage(image);
       const base64Image = await ImageConverter.fileToBase64(compressedImage);
-      const result = new Request<ImageDetection>(this.http).post('/image', {image: base64Image});
+      const result = new Request<ImageDetection>(this.http).post('/image/static', {image: base64Image});
       resolve(result);
     });
   }
